@@ -9,7 +9,7 @@ class Categoria extends Model
     protected $table='categoria';
     protected $fillable=[
         'nombre',
-        'descripcio',
+        'descripcion',
         'estado_registro'
     ];
     protected $primaryKey='id';
