@@ -9,7 +9,7 @@ class ServicioProducto extends Model
     protected $table='servicio_producto';
     protected $fillable=[
         'servicio_id',
-        '',
+        'producto_id',
         'estado_registro'
     ];
     protected $primaryKey='id';

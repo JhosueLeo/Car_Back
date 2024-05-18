@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('vehiculo', function (Blueprint $table) {
+        Schema::create('rol', function (Blueprint $table) {
             $table->id();
-            $table->string('placa')->nullable();
-            $table->string('modelo')->nullable();
-            $table->foreignId('marca_id')->references('id')->on('marca')->onUpdate('cascade')->onDelete('cascade');
+            $table->string('nombre')->nullable();
+            $table->string('descripcion')->nullable();
+            $table->string('tipo_acceso')->nullable()->default(1);
             $table->char('estado_registro')->default('A');
             $table->timestamps();
         });
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('vehiculo');
+        Schema::dropIfExists('rol');
     }
 };

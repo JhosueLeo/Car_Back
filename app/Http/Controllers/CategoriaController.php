@@ -40,6 +40,7 @@ class CategoriaController extends Controller
                 'nombre'=>$request->nombre,
                 'descripcion'=>$request->descripcion
             ]);
+            
             DB::commit();
             return response(['resp'=>'Categoria creada correctamente']);
         }catch (\Exception $e) {
@@ -54,7 +55,7 @@ class CategoriaController extends Controller
             if(!$categoria){
                 return response(['error'=>'Categoria no existe']);
             }
-            $categoria= Categoria::update([
+            $categoria->update([
                 'nombre'=>$request->nombre,
                 'descripcion'=>$request->descripcion
             ]);
@@ -65,5 +66,21 @@ class CategoriaController extends Controller
             return response()->json(["error" => "Algo salió mal", "message" => $e->getMessage()], 500);
         } 
     }
-    
+    public function delete($idCategoria){
+        DB::beginTransaction();
+        try{
+            $categoria=Categoria::where('estado_registro','A')->find($idCategoria);
+            if(!$categoria){
+                return response()->json(['resp'=>'Categoria ya esta inhabilitado']);
+            }
+            $categoria->update([
+                'estado_registro'=>'I'
+            ]);
+            DB::commit();
+            return response()->json(['resp'=>'Categoria Inhabilitado']);
+        }catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(["error" => "Algo salió mal", "message" => $e->getMessage()], 500);
+        } 
+    }
 }

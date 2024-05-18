@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('vehiculo', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('placa')->nullable();
-            $table->string('modelo')->nullable();
-            $table->foreignId('marca_id')->references('id')->on('marca')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('empleado_id')->nullable()->references('id')->on('empleado')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('username')->unique();
+            $table->string('email_verified_at')->nullable();
+            $table->string('password');
             $table->char('estado_registro')->default('A');
+            $table->rememberToken();
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('vehiculo');
+        Schema::dropIfExists('users');
     }
 };

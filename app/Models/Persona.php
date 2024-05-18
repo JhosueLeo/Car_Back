@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Persona extends Model
@@ -26,5 +26,13 @@ class Persona extends Model
     //le da su id a Cliente
     public function cliente(){
         return $this->hasMany(Cliente::class);
+    }
+    //Login
+    public function user()
+    {
+        return $this->hasOne(User::class);
+    }
+    public function users_roles(){
+        return $this->hasMany(UsuarioRol::class);
     }
 }
