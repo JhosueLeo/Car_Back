@@ -15,6 +15,7 @@ class TipoDocumentoSeeder extends Seeder
         TipoDocumento::firstOrcreate([
             'nombre'=>'DNI',
             'descripcion'=>'Documento Nacional de Identidad'
+            
         ]);
         TipoDocumento::firstOrCreate([
             'nombre'=>'RUC',
